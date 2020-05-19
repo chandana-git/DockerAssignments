@@ -183,6 +183,7 @@ docker ps --filter status=running(filters by name,label,status)
 docker ps -n(shows n last created containers)
 docker ps -l(shows latest container,includes all states)
 
+groupadd -r mygrp && useradd -r -g myuser mygrp
 ============================================================================================================================================================
 If you can't install or configure Docker, you can use the online docker setup to do the assignment.
 Step1 Goto:- https://www.katacoda.com/courses/kubernetes/playground
