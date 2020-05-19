@@ -62,12 +62,22 @@ services:
  fruit:
   image: linuxacademycontent/fruit-service:1.0.1
   ports:
-   - "8088:80"
+   - "8081:80"
   
  vegetables:
   image: linuxacademycontent/vegetable-service:1.0.0
   ports:
    - "8082:80"
+ 
+ allProducts:
+  image: linuxacademycontent/all-products:1.0.0
+  environment:
+   - FRUIT_HOST=fruit
+     FRUIT_PORT=8081
+     VEGETABLE_HOST=vegetables
+     VEGETABLE_PORT=8082
+  ports:
+   - "8080:80"
  #deploying stack file
  $ docker stack deploy -c stack.yml stack
 Creating network stack_default
@@ -77,8 +87,8 @@ Creating service stack_fruit
 $ docker service ls
 ID                  NAME                MODE                REPLICAS            IMAGE                          PORTS
 tvochxt6ire6        stack_allProducts   replicated          0/1                 linuxacademycontent/all-products:1.0.0        *:8080->80/tcp
-r7o5sgfzieo6        stack_fruit         replicated          1/1                 linuxacademycontent/fruit-service:1.0.1       *:8088->80/tcp
-4lu5geojupe5        stack_vegetables    replicated          1/1                 linuxacademycontent/vegetable-service:1.0.0   *:8089->80/tcp
+r7o5sgfzieo6        stack_fruit         replicated          1/1                 linuxacademycontent/fruit-service:1.0.1       *:8081->80/tcp
+4lu5geojupe5        stack_vegetables    replicated          1/1                 linuxacademycontent/vegetable-service:1.0.0   *:8082->80/tcp
 
 #edit stack.yml for scaling upto 3 replicas
 $ vim stack.yml
@@ -87,7 +97,7 @@ services:
  fruit:
   image: linuxacademycontent/fruit-service:1.0.1
   ports:
-   - "8088:80"
+   - "8081:80"
   deploy:
    replicas: 3    
  vegetables:
@@ -118,7 +128,7 @@ Updating service stack_vegetables (id: 4lu5geojupe5hv1c19hqk0wi7)
 $ docker service ls
 ID                  NAME                MODE                REPLICAS            IMAGE                          PORTS
 tvochxt6ire6        stack_allProducts   replicated          2/3                 linuxacademycontent/all-products:1.0.0        *:8080->80/tcp
-r7o5sgfzieo6        stack_fruit         replicated          3/3                 linuxacademycontent/fruit-service:1.0.1       *:8088->80/tcp
+r7o5sgfzieo6        stack_fruit         replicated          3/3                 linuxacademycontent/fruit-service:1.0.1       *:8081->80/tcp
 4lu5geojupe5        stack_vegetables    replicated          2/3                 linuxacademycontent/vegetable-service:1.0.0   *:8082->80/tcp 
  allProducts:
   image: linuxacademycontent/all-products:1.0.0
