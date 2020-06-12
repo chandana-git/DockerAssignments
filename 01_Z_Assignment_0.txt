@@ -148,6 +148,15 @@ i->insert
 <h1>This is Tomcat Container</h1>
 esc and  :wq
 
+vim Dockerfile
+FROM nginx:alpine
+COPY . /usr/share/nginx/html
+
+$ docker build . -t index
+$ docker run -d -p 80:80 html-server-image:v1
+
+curl localhost:80
+
 
 39. type below command:-
     docker images --help
