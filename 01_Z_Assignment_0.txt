@@ -157,6 +157,17 @@ $ docker run -d -p 80:80 html-server-image:v1
 
 curl localhost:80
 
+Using httpd container
+mkdir dir
+cd dirdocker run -d --name web -v /home/centos/dir/:/usr/local/apache2/htdocs/ -p 80:80 httpd:2.4
+88b80d8b96cfd4eb7dc178e5d4df11221fd44075297d80c8079c027f1454e913
+[centos@ip-10-0-1-83 ~]$ curl http://3.133.89.200/
+<h1>This is Tomcat Container</h1>
+
+nano index.html-><h1>This is Tomcat Container</h1>
+
+
+
 
 39. type below command:-
     docker images --help
